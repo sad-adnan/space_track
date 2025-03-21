@@ -4,6 +4,12 @@ A package tracking application for logistics management.
 
 ## Getting Started
 
+create a env file with below format in lib/env directory named .env
+
+'''
+SCANDIT_LICENSE_KEY=your_license_key
+'''
+
 This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:

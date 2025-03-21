@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
+import 'package:space_track/core/app_route_constants.dart';
 
 class HomeController extends GetxController {
   void navigateToScanPage() {
-    //TODO create scan page with name /scan
-    Get.toNamed('/scan');
+    Get.toNamed(RoutesPaths.scan);
   }
 }

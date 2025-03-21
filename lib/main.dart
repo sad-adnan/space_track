@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
+import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode.dart';
 import 'package:space_track/core/pallets.dart';
 
 import 'core/app_pages.dart';
@@ -11,6 +12,9 @@ import 'presentation/home/pages/home_page.dart';
 void main() async {
   // Ensure Flutter is initialized
   WidgetsFlutterBinding.ensureInitialized();
+
+  //Initialize the Scandit Library
+  await ScanditFlutterDataCaptureBarcode.initialize();
 
   // Initialize environment variables
   await dotenv.load(fileName: "lib/env/.env");

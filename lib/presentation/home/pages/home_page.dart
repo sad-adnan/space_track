@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
               color: Pallets.containerBgColor,
               width: Get.width,
               padding: EdgeInsets.all(16.0),
-              child: Text(
+              child: const Text(
                 'OUTBOUND',
                 style: TextStyle(
                   color: Colors.black,

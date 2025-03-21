@@ -39,6 +39,12 @@ dependencies:
   get: ^4.7.2
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  image_picker: ^1.1.2
+  intl: ^0.20.2
+  path_provider: ^2.1.5
+  permission_handler: ^11.3.1
+  scandit_flutter_datacapture_barcode: ^7.1.2
+  scandit_flutter_datacapture_core: ^7.1.2
 
 
 dev_dependencies:
@@ -65,8 +71,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-#  assets:
-#    - lib/env/.env
+  assets:
+    - lib/env/.env
 
   # To add assets to your application, add an assets section, like this:
   # assets:

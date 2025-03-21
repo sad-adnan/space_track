@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../core/pallets.dart';
 import '../controllers/home_controller.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,14 +17,14 @@ class HomePage extends StatelessWidget {
           'SpaceTrack',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: const Color(0xFF354170),
+        backgroundColor: Pallets.primaryColor,
       ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              color: Color(0xFFF8F8F8),
+              color: Pallets.containerBgColor,
               width: Get.width,
               padding: EdgeInsets.all(16.0),
               child: Text(
@@ -49,7 +50,7 @@ class HomePage extends StatelessWidget {
                   child: const Text(
                     'Packing Info',
                     style: TextStyle(
-                      color: Color(0xFF334170),
+                      color: Pallets.primaryColor,
                       fontWeight: FontWeight.w500,
                       fontSize: 14,
                     ),

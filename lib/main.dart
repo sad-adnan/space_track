@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
+import 'package:space_track/core/pallets.dart';
 
+import 'core/app_pages.dart';
+import 'core/app_route_constants.dart';
 import 'presentation/home/controllers/home_controller.dart';
 import 'presentation/home/pages/home_page.dart';
 
@@ -23,27 +26,18 @@ class SpaceTrackApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize dependencies
-    _initDependencies();
-
     return GetMaterialApp(
       title: 'SpaceTrack',
       theme: ThemeData(
-        primaryColor: const Color(0xFF354170),
+        primaryColor: Pallets.primaryColor,
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF354170),
+          backgroundColor: Pallets.primaryColor,
         ),
       ),
-      initialRoute: '/home',
+      initialRoute: RoutesPaths.home,
       debugShowCheckedModeBanner: false,
-      getPages: [
-        GetPage(name: '/home', page: () => const HomePage()),
-      ],
+      getPages: AppPages.routes,
     );
   }
 
-  void _initDependencies() {
-    // Controllers
-    Get.put(HomeController());
-  }
 }

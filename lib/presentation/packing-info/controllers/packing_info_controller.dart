@@ -96,7 +96,7 @@ class PackingInfoController extends GetxController {
       RoutesPaths.scan,
       arguments: {
         'scanAction': (String barcodeData) {
-          Get.offAndToNamed(RoutesPaths.orderLocation, arguments: barcodeData);
+          Get.offAndToNamed(RoutesPaths.packingInfo, arguments: barcodeData);
         },
       },
     );

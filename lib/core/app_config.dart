@@ -17,16 +17,16 @@ class AppConfig {
     String fileName;
     switch (env) {
       case dev:
-        fileName = '.env.dev';
+        fileName = 'lib/env/.env.dev';
         break;
       case staging:
-        fileName = '.env.staging';
+        fileName = 'lib/env/.env.staging';
         break;
       case prod:
-        fileName = '.env';
+        fileName = 'lib/env/.env';
         break;
       default:
-        fileName = '.env.dev';
+        fileName = 'lib/env/.env.dev';
     }
 
     await dotenv.load(fileName: fileName);

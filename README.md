@@ -15,6 +15,40 @@ Developed with -
     
     Dart SDk - 3.5.4
 
+
+The app has three environments -
+    
+    Development
+    Staging
+    Production
+
+To run app with a specific environment, use - 
+
+    # Development
+    flutter run --flavor dev -t lib/main_dev.dart
+
+    # Staging
+    flutter run --flavor staging -t lib/main_staging.dart
+
+    # Production
+    flutter run --flavor prod -t lib/main_prod.dart
+
+For building:
+
+    # Development build
+    flutter build apk --flavor dev -t lib/main_dev.dart
+    flutter build ios --flavor dev -t lib/main_dev.dart
+
+    # Staging build
+    flutter build apk --flavor staging -t lib/main_staging.dart
+    flutter build ios --flavor staging -t lib/main_staging.dart
+
+    # Production build
+    flutter build apk --flavor prod -t lib/main_prod.dart
+    flutter build ios --flavor prod -t lib/main_prod.dart
+
+
+
 [APK Download Link](https://drive.google.com/file/d/1noffQgQnWJJ2kWn2nAQ1CxWLsGYUXuFj/view?usp=sharing)
 
 This project is a starting point for a Flutter application.

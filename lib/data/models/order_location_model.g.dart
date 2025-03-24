@@ -8,7 +8,7 @@ part of 'order_location_model.dart';
 
 class OrderLocationModelAdapter extends TypeAdapter<OrderLocationModel> {
   @override
-  final int typeId = 1;
+  final int typeId = 2;
 
   @override
   OrderLocationModel read(BinaryReader reader) {

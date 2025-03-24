@@ -4,7 +4,7 @@ import '../../domain/entities/order_location.dart';
 
 part 'order_location_model.g.dart';
 
-@HiveType(typeId: 1)
+@HiveType(typeId: 2)
 class OrderLocationModel {
   @HiveField(0)
   final String orderId;

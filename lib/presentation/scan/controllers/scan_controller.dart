@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -8,9 +7,9 @@ import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_
 import 'package:scandit_flutter_datacapture_core/scandit_flutter_datacapture_core.dart';
 import 'package:space_track/core/app_route_constants.dart';
 
+typedef ScanAction = void Function(String barcodeData);
 
 class ScanController extends GetxController implements SparkScanListener, SparkScanFeedbackDelegate {
-
   final DataCaptureContext _dataCaptureContext = DataCaptureContext.forLicenseKey(dotenv.env['SCANDIT_LICENSE_KEY'] ?? '');
   DataCaptureContext get dataCaptureContext => _dataCaptureContext;
 
@@ -20,8 +19,7 @@ class ScanController extends GetxController implements SparkScanListener, SparkS
   late SparkScanViewSettings _sparkScanViewSettings;
   SparkScanViewSettings get sparkScanViewSettings => _sparkScanViewSettings;
 
-
-  bool _hasNavigated = false; // A flag to ensure we navigate only once per scan.
+  bool _hasNavigated = false; // A flag to ensure we run the scan action only once per scan.
 
   @override
   void onInit() {
@@ -30,12 +28,11 @@ class ScanController extends GetxController implements SparkScanListener, SparkS
     checkPermission();
   }
 
-  resetNavigated() {
+  void resetNavigated() {
     _hasNavigated = false;
   }
 
   void _init() {
-
     var sparkScanSettings = SparkScanSettings();
 
     sparkScanSettings.enableSymbologies({
@@ -59,7 +56,6 @@ class ScanController extends GetxController implements SparkScanListener, SparkS
     _sparkScanViewSettings = SparkScanViewSettings();
   }
 
-
   void checkPermission() async {
     var status = await Permission.camera.request();
     if (!status.isGranted) {
@@ -73,7 +69,6 @@ class ScanController extends GetxController implements SparkScanListener, SparkS
     super.onClose();
   }
 
-
   @override
   Future<void> didScan(SparkScan sparkScan, SparkScanSession session, Future<FrameData> Function() getFrameData) async {
     var barcode = session.newlyRecognizedBarcode;
@@ -82,8 +77,13 @@ class ScanController extends GetxController implements SparkScanListener, SparkS
     if (_isValidBarcode(barcode) && !_hasNavigated) {
       _hasNavigated = true;
 
-      final destinationRoute = Get.arguments?['destinationRoute'] ?? RoutesPaths.packingInfo;
-      Get.offAndToNamed(destinationRoute, arguments: barcode.data);
+      final dynamic action = Get.arguments?['scanAction'];
+      if (action != null && action is ScanAction) {
+        action(barcode.data ?? "");
+      } else {
+        final destinationRoute = Get.arguments?['destinationRoute'] ?? RoutesPaths.packingInfo;
+        Get.offAndToNamed(destinationRoute, arguments: barcode.data);
+      }
     }
   }
 
@@ -93,9 +93,8 @@ class ScanController extends GetxController implements SparkScanListener, SparkS
 
   @override
   Future<void> didUpdateSession(SparkScan sparkScan, SparkScanSession session, Future<FrameData> Function() getFrameData) async {
-
+    // Optionally handle session updates.
   }
-
 
   @override
   SparkScanBarcodeFeedback? feedbackForBarcode(Barcode barcode) {

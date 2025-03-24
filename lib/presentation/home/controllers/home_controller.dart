@@ -5,7 +5,11 @@ class HomeController extends GetxController {
   void navigateToScanPage({required String destination}) {
     Get.toNamed(
       RoutesPaths.scan,
-      arguments: {'destinationRoute': destination},
+      arguments: {
+        'scanAction': (String barcodeData) {
+          Get.offAndToNamed(destination, arguments: barcodeData);
+        },
+      },
     );
   }
 }

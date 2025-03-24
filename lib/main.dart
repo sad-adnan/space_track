@@ -14,7 +14,6 @@ import 'data/models/packing_info_model.dart';
 import 'presentation/home/binding/home_binding.dart';
 
 void main() async {
-  //if no flavor is passed we will use the dev flavor
   await mainInitializations(AppFlavor.dev);
 }
 
@@ -42,18 +41,20 @@ Future<void> mainInitializations(AppFlavor environment) async {
   final orderLocationBox = await Hive.openBox<OrderLocationModel>('orderLocation');
   Get.put<Box<OrderLocationModel>>(orderLocationBox);
 
-  // If the orderLocation box is empty, will add 10 random entries
   if (orderLocationBox.isEmpty) {
-    for (int i = 0; i < 10; i++) {
-      final orderId = 'FO${1000 + i}';
-      final location = generateRandomLocation();
-      final orderLocationEntry = OrderLocationModel(orderId: orderId, location: location);
-      await orderLocationBox.put(orderId, orderLocationEntry);
-    }
+    await populateOrderLocationBox(orderLocationBox);
   }
 
-  // Initialize app
   runApp(SpaceTrackApp());
+}
+
+Future<void> populateOrderLocationBox(Box<OrderLocationModel> box) async {
+  for (int i = 0; i < 10; i++) {
+    final orderId = 'FO${1000 + i}';
+    final location = generateRandomLocation();
+    final orderLocationEntry = OrderLocationModel(orderId: orderId, location: location);
+    await box.put(orderId, orderLocationEntry);
+  }
 }
 
 String generateRandomLocation() {

@@ -4,6 +4,7 @@ abstract class AppRoutes {
   static const String homeRouteName = 'home';
   static const String scanRouteName = 'scan';
   static const String packingInfoRouteName = 'packing-info';
+  static const String orderLocationRouteName = 'order-location';
 
 }
 
@@ -14,5 +15,6 @@ abstract class RoutesPaths {
   static const String home = '/home';
   static const String scan = '/scan';
   static const String packingInfo = '/packing-info';
+  static const String orderLocation = '/order-location';
 
 }

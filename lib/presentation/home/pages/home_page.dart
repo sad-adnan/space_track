@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
             ),
             CustomMenuButton(
               title: 'Order Location',
-              onTap: () => controller.navigateToScanPage(destination:RoutesPaths.packingInfo),
+              onTap: () => controller.navigateToScanPage(destination:RoutesPaths.orderLocation),
               padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 16.0),
             ),
           ],

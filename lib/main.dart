@@ -11,6 +11,7 @@ import 'core/app_pages.dart';
 import 'core/app_route_constants.dart';
 import 'data/models/order_location_model.dart';
 import 'data/models/packing_info_model.dart';
+import 'presentation/home/binding/home_binding.dart';
 
 void main() async {
   //if no flavor is passed we will use the dev flavor
@@ -78,6 +79,7 @@ class SpaceTrackApp extends StatelessWidget {
         ),
       ),
       initialRoute: RoutesPaths.home,
+      initialBinding: HomeBinding(),
       debugShowCheckedModeBanner: false,
       getPages: AppPages.routes,
     );

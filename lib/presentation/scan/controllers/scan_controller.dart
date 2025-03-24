@@ -81,7 +81,9 @@ class ScanController extends GetxController implements SparkScanListener, SparkS
 
     if (_isValidBarcode(barcode) && !_hasNavigated) {
       _hasNavigated = true;
-      Get.offAndToNamed(RoutesPaths.packingInfo, arguments: barcode.data);
+
+      final destinationRoute = Get.arguments?['destinationRoute'] ?? RoutesPaths.packingInfo;
+      Get.offAndToNamed(destinationRoute, arguments: barcode.data);
     }
   }
 

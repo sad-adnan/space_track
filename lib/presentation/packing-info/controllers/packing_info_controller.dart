@@ -92,7 +92,10 @@ class PackingInfoController extends GetxController {
   void setPackerComments(String comments) => packerComments.value = comments;
 
   void navigateToScanPage() {
-    Get.offAndToNamed(RoutesPaths.scan);
+    Get.offAndToNamed(
+      RoutesPaths.scan,
+      arguments: {'destinationRoute': RoutesPaths.packingInfo,},
+    );
   }
 
   Future<void> addPhoto({ImageSource source = ImageSource.camera}) async {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../core/app_route_constants.dart';
 import '../../../core/pallets.dart';
 import '../controllers/home_controller.dart';
 import '../widgets/custom_menu_button.dart';
@@ -38,12 +39,12 @@ class HomePage extends StatelessWidget {
             ),
             CustomMenuButton(
               title: 'Packing Info',
-              onTap: controller.navigateToScanPage,
+              onTap: () => controller.navigateToScanPage(destination:RoutesPaths.packingInfo),
               padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
             ),
             CustomMenuButton(
               title: 'Order Location',
-              onTap: controller.navigateToScanPage,
+              onTap: () => controller.navigateToScanPage(destination:RoutesPaths.packingInfo),
               padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 16.0),
             ),
           ],

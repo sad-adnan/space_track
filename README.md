@@ -4,7 +4,7 @@ A package tracking application for logistics management.
 
 ## Getting Started
 
-create a env file with below format in lib/env directory named .env -
+create env files with below format in lib/env directory named .env (for production) .env.dev (for development), .env.staging (for staging) -
 
     SCANDIT_LICENSE_KEY=your_license_key
 
@@ -49,7 +49,42 @@ For building:
 
 
 
-[APK Download Link](https://drive.google.com/file/d/1noffQgQnWJJ2kWn2nAQ1CxWLsGYUXuFj/view?usp=sharing)
+[APK Download Link DEV](https://drive.google.com/file/d/19BuWKpTBodjGYPhDX9s0dVuYpxSzkKN-/view?usp=drive_link)
+[APK Download Link Staging](https://drive.google.com/file/d/1IUy1rZbSacj9DJd6xYAyDNFX9eczq4Ft/view?usp=drive_link)
+[APK Download Link Prod](https://drive.google.com/file/d/1VqcOMP3VcbCRKAcXDXnifcdMU3kyUDOi/view?usp=drive_link)
+
+
+# Libraries Used in this project:
+
+## Scandit Libraries
+1. [Scandit Flutter Data Capture Barcode](https://pub.dev/packages/scandit_flutter_datacapture_barcode)
+2. [Scandit flutter data capture parser](https://pub.dev/packages/scandit_flutter_datacapture_parser)
+3. [Scandit Flutter Data Capture Core](https://pub.dev/packages/scandit_flutter_datacapture_core)
+
+## For Local Database
+4. [Hive](https://pub.dev/packages/hive)
+5. [Hive Flutter](https://pub.dev/packages/hive_flutter)
+
+## For State Management
+6. [Get](https://pub.dev/packages/get)
+
+## For Image Picker and Image Processing
+7. [Image Picker](https://pub.dev/packages/image_picker)
+8. [Path Provider](https://pub.dev/packages/path_provider)
+9. [Permission Handler](https://pub.dev/packages/permission_handler)
+
+## For Creating Unique ID
+10. [UUID](https://pub.dev/packages/uuid)
+
+## For Decorating with Dotted Border
+11. [Dotted Border](https://pub.dev/packages/dotted_border)
+
+## For Date Formatting
+12. [Intl](https://pub.dev/packages/intl)
+
+## For Environment Variables
+13. [flutter_dotenv](https://pub.dev/packages/flutter_dotenv)
+
 
 This project is a starting point for a Flutter application.
 

@@ -3,6 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:space_track/presentation/packing-info/controllers/packing_info_controller.dart';
 
 import '../../../data/datasources/local_data_source.dart';
+import '../../../data/models/order_location_model.dart';
 import '../../../data/models/packing_info_model.dart';
 import '../../../data/repositories/package_repository_impl.dart';
 import '../../../domain/usecases/get_packing_info_usecase.dart';
@@ -17,9 +18,14 @@ class PackingInfoBinding extends Bindings {
       return await Hive.openBox<PackingInfoModel>('packingInfo');
     });
 
+    Get.putAsync<Box<OrderLocationModel>>(() async {
+      return await Hive.openBox<OrderLocationModel>('orderLocation');
+    });
+
     Get.lazyPut<LocalDataSource>(() {
       final packingInfoBox = Get.find<Box<PackingInfoModel>>();
-      return LocalDataSource(packingInfoBox: packingInfoBox);
+      final orderLocationBox = Get.find<Box<OrderLocationModel>>();
+      return LocalDataSource(packingInfoBox: packingInfoBox,orderLocationBox: orderLocationBox);
     });
 
     Get.lazyPut<PackageRepositoryImpl>(() {

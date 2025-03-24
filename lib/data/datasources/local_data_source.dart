@@ -1,11 +1,13 @@
 import 'package:hive/hive.dart';
 
+import '../models/order_location_model.dart';
 import '../models/packing_info_model.dart';
 
 class LocalDataSource {
   final Box<PackingInfoModel> packingInfoBox;
+  final Box<OrderLocationModel> orderLocationBox;
 
-  LocalDataSource({required this.packingInfoBox});
+  LocalDataSource( {required this.packingInfoBox,required this.orderLocationBox,});
 
   Future<void> savePackingInfo(PackingInfoModel model) async {
     await packingInfoBox.put(model.id, model);
@@ -20,5 +22,12 @@ class LocalDataSource {
 
   Future<List<PackingInfoModel>> getAllPackingInfo() async {
     return packingInfoBox.values.toList();
+  }
+
+  Future<OrderLocationModel?> getOrderLocationByOrderId(String orderId) async{
+    final models = orderLocationBox.values.where(
+          (model) => model.orderId == orderId,
+    );
+    return models.isNotEmpty ? models.first : null;
   }
 }

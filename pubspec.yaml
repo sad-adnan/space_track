@@ -76,6 +76,8 @@ flutter:
 
   assets:
     - lib/env/.env
+    - lib/env/.env.dev
+    - lib/env/.env.staging
     - assets/images/png/
 
   # To add assets to your application, add an assets section, like this:

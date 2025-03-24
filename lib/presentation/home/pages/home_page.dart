@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../core/pallets.dart';
 import '../controllers/home_controller.dart';
+import '../widgets/custom_menu_button.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -35,28 +36,15 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: GestureDetector(
-                onTap: controller.navigateToScanPage,
-                child: Container(
-                  padding: const EdgeInsets.all(30.0),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade300, width: 1.8),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  width: double.infinity,
-                  alignment: Alignment.center,
-                  child: const Text(
-                    'Packing Info',
-                    style: TextStyle(
-                      color: Pallets.primaryColor,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-              ),
+            CustomMenuButton(
+              title: 'Packing Info',
+              onTap: controller.navigateToScanPage,
+              padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
+            ),
+            CustomMenuButton(
+              title: 'Order Location',
+              onTap: controller.navigateToScanPage,
+              padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 16.0),
             ),
           ],
         ),

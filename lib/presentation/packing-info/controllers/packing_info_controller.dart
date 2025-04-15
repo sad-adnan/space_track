@@ -9,7 +9,6 @@ import '../../../domain/entities/packing_info.dart';
 import '../../../domain/usecases/get_packing_info_usecase.dart';
 import '../../../domain/usecases/save_packing_info_usecase.dart';
 
-
 class PackingInfoController extends GetxController {
   final SavePackingInfoUseCase savePackingInfoUseCase;
   final GetPackingInfoUseCase getPackingInfoUseCase;
@@ -82,7 +81,6 @@ class PackingInfoController extends GetxController {
     isDataSaved.value = false;
   }
 
-
   void setLoadQuantity(int quantity) {
     if (quantity > 0) {
       loadQuantity.value = quantity;
@@ -95,9 +93,7 @@ class PackingInfoController extends GetxController {
     Get.offAndToNamed(
       RoutesPaths.scan,
       arguments: {
-        'scanAction': (String barcodeData) {
-          Get.offAndToNamed(RoutesPaths.packingInfo, arguments: barcodeData);
-        },
+        'scanAction': onScanCode,
       },
     );
   }
@@ -116,7 +112,6 @@ class PackingInfoController extends GetxController {
       photoUrls.removeAt(index);
     }
   }
-
 
   Future<void> _submit() async {
     if (!isValid.value) return;
@@ -160,4 +155,12 @@ class PackingInfoController extends GetxController {
   }
 
   void submitPackingInfo() => _submit();
+
+  Future<void> onScanCode(String barcodeData) async {
+    scanCode.value = barcodeData;
+    await loadExistingData();
+    Get.offAndToNamed(RoutesPaths.packingInfo, arguments: barcodeData);
+    //play a sound
+    print("a sound will be played here.");
+  }
 }

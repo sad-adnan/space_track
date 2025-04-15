@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:space_track/core/app_route_constants.dart';
+
 import '../../../domain/usecases/get_order_location_info_usecase.dart';
 
 class OrderLocationController extends GetxController {
@@ -13,7 +14,6 @@ class OrderLocationController extends GetxController {
   final isDataSaved = false.obs;
   final scanCode = ''.obs;
   final locationData = ''.obs;
-
 
   @override
   void onInit() {
@@ -49,10 +49,16 @@ class OrderLocationController extends GetxController {
     Get.offAndToNamed(
       RoutesPaths.scan,
       arguments: {
-        'scanAction': (String barcodeData) {
-          Get.offAndToNamed(RoutesPaths.orderLocation, arguments: barcodeData);
-        },
+        'scanAction': onScanCode,
       },
     );
+  }
+
+  Future<void> onScanCode(String barcodeData) async {
+    scanCode.value = barcodeData;
+    await loadExistingData();
+    Get.offAndToNamed(RoutesPaths.orderLocation, arguments: barcodeData);
+    //show popup dialog
+    print("Dialog will open here.");
   }
 }

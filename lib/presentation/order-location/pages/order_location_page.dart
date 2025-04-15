@@ -1,11 +1,11 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:space_track/core/pallets.dart';
 import 'package:space_track/core/app_styles.dart';
+import 'package:space_track/core/pallets.dart';
 import 'package:space_track/generated/assets.dart';
 
-import '../../packing-info/widgets/section_container.dart';
+import '../../global/widgets/section_container.dart';
 import '../controllers/order_location_controller.dart';
 
 class OrderLocationPage extends StatelessWidget {
@@ -70,9 +70,9 @@ class OrderLocationPage extends StatelessWidget {
                           ],
                         ),
                       ),
-
-                      SizedBox(height: 10,),
-
+                      SizedBox(
+                        height: 10,
+                      ),
                       Obx(() {
                         return Padding(
                           padding: AppStyles.sectionPadding,
@@ -89,12 +89,21 @@ class OrderLocationPage extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text("Location",style: TextStyle(fontSize: 20,),),
-                                  SizedBox(height: 5,),
+                                  Text(
+                                    "Location",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
                                   Text(
                                     controller.locationData.value,
                                     style: const TextStyle(
-                                        fontSize: 40,fontWeight: FontWeight.bold,),
+                                      fontSize: 40,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                     textAlign: TextAlign.center,
                                   ),
                                 ],

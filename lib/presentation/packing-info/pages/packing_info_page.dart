@@ -9,10 +9,10 @@ import 'package:space_track/core/pallets.dart';
 import '../../../core/app_styles.dart';
 import '../../../domain/entities/packing_info.dart';
 import '../../../generated/assets.dart';
+import '../../global/widgets/custom_bottomsheet_content.dart';
+import '../../global/widgets/custom_slider_button.dart';
+import '../../global/widgets/section_container.dart';
 import '../controllers/packing_info_controller.dart';
-import '../widgets/custom_bottomsheet_content.dart';
-import '../widgets/custom_slider_button.dart';
-import '../widgets/section_container.dart';
 
 class PackingInfoPage extends StatelessWidget {
   const PackingInfoPage({Key? key}) : super(key: key);
@@ -54,11 +54,9 @@ class PackingInfoPage extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text('Scan Code',
-                                    style: AppStyles.labelStyle),
+                                const Text('Scan Code', style: AppStyles.labelStyle),
                                 const SizedBox(height: 4),
-                                Text(controller.scanCode.value,
-                                    style: AppStyles.valueStyle),
+                                Text(controller.scanCode.value, style: AppStyles.valueStyle),
                               ],
                             ),
                             IconButton(
@@ -80,16 +78,12 @@ class PackingInfoPage extends StatelessWidget {
                         child: Obx(() {
                           return Row(
                             children: [
-                              const Text('PACKING INFO',
-                                  style: TextStyle(
-                                      fontSize: 14, color: Colors.black)),
+                              const Text('PACKING INFO', style: TextStyle(fontSize: 14, color: Colors.black)),
                               const Spacer(),
                               if (controller.isDataSaved.value)
                                 Text(
                                   'Submitted: ${controller.formatDateTime(controller.createdAt)}',
-                                  style: const TextStyle(
-                                      fontSize: 14,
-                                      color: Pallets.submittedTextColor),
+                                  style: const TextStyle(fontSize: 14, color: Pallets.submittedTextColor),
                                 ),
                             ],
                           );
@@ -103,16 +97,10 @@ class PackingInfoPage extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text('Load type',
-                                      style: AppStyles.labelStyle),
+                                  const Text('Load type', style: AppStyles.labelStyle),
                                   const SizedBox(height: 4),
                                   Text(
-                                    controller.selectedLoadTypes.isEmpty
-                                        ? 'Select load types'
-                                        : controller.selectedLoadTypes
-                                            .map((e) =>
-                                                e.toString().split('.').last)
-                                            .join(', '),
+                                    controller.selectedLoadTypes.isEmpty ? 'Select load types' : controller.selectedLoadTypes.map((e) => e.toString().split('.').last).join(', '),
                                     style: AppStyles.valueStyle,
                                   ),
                                 ],
@@ -121,13 +109,10 @@ class PackingInfoPage extends StatelessWidget {
                             Visibility(
                               visible: !controller.isDataSaved.value,
                               child: GestureDetector(
-                                onTap: () => _showLoadTypeBottomSheet(
-                                    context, controller),
+                                onTap: () => _showLoadTypeBottomSheet(context, controller),
                                 child: const Text(
                                   'Select',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: Pallets.primaryColor),
+                                  style: TextStyle(fontSize: 16, color: Pallets.primaryColor),
                                 ),
                               ),
                             ),
@@ -141,24 +126,19 @@ class PackingInfoPage extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text('Load Qty',
-                                      style: AppStyles.labelStyle),
+                                  const Text('Load Qty', style: AppStyles.labelStyle),
                                   const SizedBox(height: 4),
-                                  Text(controller.loadQuantity.toString(),
-                                      style: AppStyles.valueStyle),
+                                  Text(controller.loadQuantity.toString(), style: AppStyles.valueStyle),
                                 ],
                               ),
                             ),
                             Visibility(
                               visible: !controller.isDataSaved.value,
                               child: GestureDetector(
-                                onTap: () => _showQuantityBottomSheet(
-                                    context, controller),
+                                onTap: () => _showQuantityBottomSheet(context, controller),
                                 child: const Text(
                                   'Edit',
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: Pallets.primaryColor),
+                                  style: TextStyle(fontSize: 16, color: Pallets.primaryColor),
                                 ),
                               ),
                             ),
@@ -172,18 +152,14 @@ class PackingInfoPage extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Text('Packer Comments *',
-                                    style: AppStyles.labelStyle),
+                                const Text('Packer Comments *', style: AppStyles.labelStyle),
                                 Visibility(
                                   visible: !controller.isDataSaved.value,
                                   child: GestureDetector(
-                                    onTap: () => _showCommentsBottomSheet(
-                                        context, controller),
+                                    onTap: () => _showCommentsBottomSheet(context, controller),
                                     child: const Text(
                                       'Edit',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          color: Pallets.primaryColor),
+                                      style: TextStyle(fontSize: 16, color: Pallets.primaryColor),
                                     ),
                                   ),
                                 ),
@@ -191,13 +167,9 @@ class PackingInfoPage extends StatelessWidget {
                             ),
                             const SizedBox(height: 8),
                             if (controller.packerComments.value.isNotEmpty)
-                              Text(controller.packerComments.value,
-                                  style: const TextStyle(
-                                      fontSize: 14, color: Colors.black))
+                              Text(controller.packerComments.value, style: const TextStyle(fontSize: 14, color: Colors.black))
                             else
-                              const Text('No comments yet.',
-                                  style: TextStyle(
-                                      fontSize: 14, color: Colors.black54)),
+                              const Text('No comments yet.', style: TextStyle(fontSize: 14, color: Colors.black54)),
                           ],
                         ),
                       ),
@@ -210,19 +182,15 @@ class PackingInfoPage extends StatelessWidget {
                           children: [
                             Text(
                               'PACKING PHOTOS${controller.isDataSaved.value ? "" : " (Max 5)"}',
-                              style: const TextStyle(
-                                  fontSize: 14, color: Colors.black),
+                              style: const TextStyle(fontSize: 14, color: Colors.black),
                             ),
                             Visibility(
                               visible: !controller.isDataSaved.value,
                               child: GestureDetector(
-                                onTap: () => controller.addPhoto(
-                                    source: ImageSource.gallery),
+                                onTap: () => controller.addPhoto(source: ImageSource.gallery),
                                 child: const Text(
                                   '+Gallery',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: Pallets.primaryColor),
+                                  style: TextStyle(fontSize: 14, color: Pallets.primaryColor),
                                 ),
                               ),
                             ),
@@ -237,10 +205,7 @@ class PackingInfoPage extends StatelessWidget {
                           spacing: 8,
                           runSpacing: 8,
                           children: [
-                            ...controller.photoUrls
-                                .asMap()
-                                .entries
-                                .map((entry) {
+                            ...controller.photoUrls.asMap().entries.map((entry) {
                               final index = entry.key;
                               final url = entry.value;
                               return Stack(
@@ -249,15 +214,13 @@ class PackingInfoPage extends StatelessWidget {
                                     width: 105,
                                     height: 105,
                                     decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.grey, width: 0.5),
+                                      border: Border.all(color: Colors.grey, width: 0.5),
                                       borderRadius: BorderRadius.circular(4),
                                     ),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(4),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(
-                                            4), // This creates spacing
+                                        padding: const EdgeInsets.all(4), // This creates spacing
                                         child: Image.file(
                                           File(url),
                                           width: double.infinity,
@@ -272,26 +235,22 @@ class PackingInfoPage extends StatelessWidget {
                                       top: -2,
                                       right: -2,
                                       child: GestureDetector(
-                                        onTap: () =>
-                                            controller.removePhoto(index),
+                                        onTap: () => controller.removePhoto(index),
                                         child: Container(
                                           padding: const EdgeInsets.all(2),
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             shape: BoxShape.circle,
-                                            border: Border.all(
-                                                color: Colors.grey, width: 0.5),
+                                            border: Border.all(color: Colors.grey, width: 0.5),
                                           ),
-                                          child: const Icon(Icons.close,
-                                              size: 16, color: Colors.black),
+                                          child: const Icon(Icons.close, size: 16, color: Colors.black),
                                         ),
                                       ),
                                     ),
                                 ],
                               );
                             }).toList(),
-                            if (controller.photoUrls.length < 5 &&
-                                !controller.isDataSaved.value)
+                            if (controller.photoUrls.length < 5 && !controller.isDataSaved.value)
                               GestureDetector(
                                 onTap: () => controller.addPhoto(),
                                 child: DottedBorder(
@@ -304,8 +263,7 @@ class PackingInfoPage extends StatelessWidget {
                                     width: 100,
                                     height: 100,
                                     child: const Center(
-                                      child: Icon(Icons.camera_alt,
-                                          color: Colors.grey, size: 32),
+                                      child: Icon(Icons.camera_alt, color: Colors.grey, size: 32),
                                     ),
                                   ),
                                 ),
@@ -321,8 +279,7 @@ class PackingInfoPage extends StatelessWidget {
                 Container(
                   padding: AppStyles.sectionPadding,
                   decoration: const BoxDecoration(
-                    border:
-                        Border(top: BorderSide(color: Colors.grey, width: 0.5)),
+                    border: Border(top: BorderSide(color: Colors.grey, width: 0.5)),
                     color: Colors.white,
                   ),
                   child: Obx(() {
@@ -351,8 +308,7 @@ class PackingInfoPage extends StatelessWidget {
     );
   }
 
-  void _showLoadTypeBottomSheet(
-      BuildContext context, PackingInfoController controller) {
+  void _showLoadTypeBottomSheet(BuildContext context, PackingInfoController controller) {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.white,
@@ -360,8 +316,7 @@ class PackingInfoPage extends StatelessWidget {
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
       builder: (ctx) {
-        List<LoadType> tempSelectedLoadTypes =
-            List.from(controller.selectedLoadTypes);
+        List<LoadType> tempSelectedLoadTypes = List.from(controller.selectedLoadTypes);
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             return CustomBottomSheetContent(
@@ -395,8 +350,7 @@ class PackingInfoPage extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    controller.selectedLoadTypes
-                        .assignAll(tempSelectedLoadTypes);
+                    controller.selectedLoadTypes.assignAll(tempSelectedLoadTypes);
                     Navigator.pop(ctx);
                   },
                   child: const Text('Save'),
@@ -409,15 +363,12 @@ class PackingInfoPage extends StatelessWidget {
     );
   }
 
-  void _showQuantityBottomSheet(
-      BuildContext context, PackingInfoController controller) {
-    final textController =
-        TextEditingController(text: controller.loadQuantity.toString());
+  void _showQuantityBottomSheet(BuildContext context, PackingInfoController controller) {
+    final textController = TextEditingController(text: controller.loadQuantity.toString());
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
       isScrollControlled: true,
       builder: (ctx) {
         return CustomBottomSheetContent(
@@ -463,15 +414,12 @@ class PackingInfoPage extends StatelessWidget {
     );
   }
 
-  void _showCommentsBottomSheet(
-      BuildContext context, PackingInfoController controller) {
-    final textController =
-        TextEditingController(text: controller.packerComments.value);
+  void _showCommentsBottomSheet(BuildContext context, PackingInfoController controller) {
+    final textController = TextEditingController(text: controller.packerComments.value);
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
       isScrollControlled: true,
       builder: (ctx) {
         return CustomBottomSheetContent(

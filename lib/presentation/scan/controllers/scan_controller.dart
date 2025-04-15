@@ -1,11 +1,13 @@
 import 'dart:async';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_barcode.dart';
 import 'package:scandit_flutter_datacapture_barcode/scandit_flutter_datacapture_spark_scan.dart';
 import 'package:scandit_flutter_datacapture_core/scandit_flutter_datacapture_core.dart';
-import 'package:space_track/core/app_route_constants.dart';
+
+import '../../../core/helper_utils.dart';
 
 typedef ScanAction = void Function(String barcodeData);
 
@@ -60,6 +62,7 @@ class ScanController extends GetxController implements SparkScanListener, SparkS
     var status = await Permission.camera.request();
     if (!status.isGranted) {
       print("Camera permission denied!!");
+      HelperUtils.showErrorSnackbar("Camera permission is required to scan barcodes");
     }
   }
 
@@ -78,11 +81,10 @@ class ScanController extends GetxController implements SparkScanListener, SparkS
       _hasNavigated = true;
 
       final dynamic action = Get.arguments?['scanAction'];
-      if (action != null && action is ScanAction) {
+      if (action != null) {
         action(barcode.data ?? "");
       } else {
-        final destinationRoute = Get.arguments?['destinationRoute'] ?? RoutesPaths.packingInfo;
-        Get.offAndToNamed(destinationRoute, arguments: barcode.data);
+        HelperUtils.showErrorSnackbar("No action defined for this scan");
       }
     }
   }
@@ -101,7 +103,8 @@ class ScanController extends GetxController implements SparkScanListener, SparkS
     if (_isValidBarcode(barcode)) {
       return SparkScanBarcodeSuccessFeedback();
     } else {
-      return SparkScanBarcodeErrorFeedback.fromMessage('Wrong barcode', Duration(seconds: 60));
+      HelperUtils.showErrorSnackbar("Invalid barcode format");
+      return SparkScanBarcodeErrorFeedback.fromMessage('Wrong barcode', Duration(seconds: 3));
     }
   }
 }

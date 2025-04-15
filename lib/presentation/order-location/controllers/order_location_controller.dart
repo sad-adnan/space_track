@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:space_track/core/app_route_constants.dart';
 
+import '../../../core/helper_utils.dart';
 import '../../../domain/usecases/get_order_location_info_usecase.dart';
 
 class OrderLocationController extends GetxController {
@@ -58,7 +59,6 @@ class OrderLocationController extends GetxController {
     scanCode.value = barcodeData;
     await loadExistingData();
     Get.offAndToNamed(RoutesPaths.orderLocation, arguments: barcodeData);
-    //show popup dialog
-    print("Dialog will open here.");
+    HelperUtils.playSound();
   }
 }

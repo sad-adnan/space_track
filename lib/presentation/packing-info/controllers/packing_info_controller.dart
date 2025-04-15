@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:space_track/core/app_route_constants.dart';
+import 'package:space_track/core/helper_utils.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../domain/entities/packing_info.dart';
@@ -160,7 +161,6 @@ class PackingInfoController extends GetxController {
     scanCode.value = barcodeData;
     await loadExistingData();
     Get.offAndToNamed(RoutesPaths.packingInfo, arguments: barcodeData);
-    //play a sound
-    print("a sound will be played here.");
+    HelperUtils.showAppDialog(title: "A Random Dialog", message: "A Random Dialog Opened.");
   }
 }

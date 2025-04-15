@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -43,5 +44,46 @@ class HelperUtils {
       duration: Duration(seconds: 3),
       icon: Icon(Icons.info, color: Colors.white),
     );
+  }
+
+  static void showAppDialog({
+    required String title,
+    required String message,
+    String confirmText = "OK",
+    String? cancelText,
+    VoidCallback? onConfirm,
+    VoidCallback? onCancel,
+  }) {
+    Get.dialog(
+      AlertDialog(
+        title: Text(title),
+        content: Text(message),
+        actions: [
+          if (cancelText != null)
+            TextButton(
+              onPressed: () {
+                Get.back();
+                onCancel?.call();
+              },
+              child: Text(cancelText),
+            ),
+          TextButton(
+            onPressed: () {
+              Get.back();
+              onConfirm?.call();
+            },
+            child: Text(confirmText),
+          ),
+        ],
+      ),
+      barrierDismissible: false,
+    );
+  }
+
+  static void playSound() async {
+    final player = AudioPlayer();
+
+    await player.play(UrlSource("https://download.samplelib.com/mp3/sample-3s.mp3"));
+    showSuccessSnackbar("Playing a audio.");
   }
 }

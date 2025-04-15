@@ -1,11 +1,73 @@
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 
+import '../../../data/datasources/local_data_source.dart';
+import '../../../data/models/order_location_model.dart';
+import '../../../data/models/packing_info_model.dart';
+import '../../../data/repositories/order_location_repository_impl.dart';
+import '../../../data/repositories/package_repository_impl.dart';
+import '../../../domain/usecases/get_order_location_info_usecase.dart';
+import '../../../domain/usecases/get_packing_info_usecase.dart';
+import '../../../domain/usecases/save_packing_info_usecase.dart';
+import '../../order-location/controllers/order_location_controller.dart';
+import '../../packing-info/controllers/packing_info_controller.dart';
 import '../controllers/home_controller.dart';
-
 
 class HomeBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => HomeController());
+
+    Get.putAsync<Box<PackingInfoModel>>(() async {
+      return await Hive.openBox<PackingInfoModel>('packingInfo');
+    });
+
+    Get.putAsync<Box<OrderLocationModel>>(() async {
+      return await Hive.openBox<OrderLocationModel>('orderLocation');
+    });
+
+    Get.lazyPut<LocalDataSource>(() {
+      final packingInfoBox = Get.find<Box<PackingInfoModel>>();
+      final orderLocationBox = Get.find<Box<OrderLocationModel>>();
+      return LocalDataSource(packingInfoBox: packingInfoBox, orderLocationBox: orderLocationBox);
+    });
+
+    Get.lazyPut<PackageRepositoryImpl>(() {
+      final localDataSource = Get.find<LocalDataSource>();
+      return PackageRepositoryImpl(localDataSource: localDataSource);
+    });
+
+    Get.lazyPut<SavePackingInfoUseCase>(() {
+      final packageRepository = Get.find<PackageRepositoryImpl>();
+      return SavePackingInfoUseCase(packageRepository);
+    });
+
+    Get.lazyPut<GetPackingInfoUseCase>(() {
+      final packageRepository = Get.find<PackageRepositoryImpl>();
+      return GetPackingInfoUseCase(packageRepository);
+    });
+
+    Get.lazyPut<PackingInfoController>(() {
+      return PackingInfoController(
+        savePackingInfoUseCase: Get.find<SavePackingInfoUseCase>(),
+        getPackingInfoUseCase: Get.find<GetPackingInfoUseCase>(),
+      );
+    });
+
+    Get.lazyPut<OrderLocationRepositoryImpl>(() {
+      final localDataSource = Get.find<LocalDataSource>();
+      return OrderLocationRepositoryImpl(localDataSource: localDataSource);
+    });
+
+    Get.lazyPut<GetOrderLocationUseCase>(() {
+      final orderRepository = Get.find<OrderLocationRepositoryImpl>();
+      return GetOrderLocationUseCase(orderRepository);
+    });
+
+    Get.lazyPut<OrderLocationController>(() {
+      return OrderLocationController(
+        getOrderLocationUseCase: Get.find<GetOrderLocationUseCase>(),
+      );
+    });
   }
 }
